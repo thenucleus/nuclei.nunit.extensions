@@ -1,27 +1,27 @@
 <?xml version="1.0"?>
 <package xmlns="http://schemas.microsoft.com/packaging/2010/07/nuspec.xsd">
   <metadata>
-    <id>Nuclei.Build</id>
-    <version>${Version}</version>
+    <id>Nuclei.Nunit.Extensions</id>
+    <version>$VersionSemantic$</version>
     <authors>P. van der Velde</authors>
     <owners>P. van der Velde</owners>
     <licenseUrl>http://www.apache.org/licenses/LICENSE-2.0</licenseUrl>
     <projectUrl>https://github.com/pvandervelde/Nuclei</projectUrl>
     <requireLicenseAcceptance>false</requireLicenseAcceptance>
     <description>
-      Provides attributes that can be applied to assemblies to provide build related information.
+      Provides a set of base classes for testing hashcode and equality contract implementations with NUnit.
     </description>
     <releaseNotes>
-      ${ReleaseNotes}
+      $ReleaseNotes$
     </releaseNotes>
     <dependencies>
-      ${Dependencies}
+      $Dependencies$
     </dependencies>
   </metadata>
   <files>
-    <file src="${DirBin}\Nuclei.Build.dll" target="lib\net45" />
-    <file src="${DirBin}\Nuclei.Build.pdb" target="lib\net45" />
-    <file src="${DirBin}\Nuclei.Build.xml" target="lib\net45" />
-    <file src="${DirSrc}\Nuclei.Build\**\*.cs" target="src\Nuclei.Build" />
+    <file src="$DirBin$\Nuclei.Nunit.Extensions.dll" target="lib\net45" />
+    <file src="$DirBin$\Nuclei.Nunit.Extensions.pdb" target="lib\net45" />
+    <file src="$DirBin$\Nuclei.Nunit.Extensions.xml" target="lib\net45" />
+    <file src="$DirSrc$\Nuclei.Nunit.Extensions\**\*.cs" target="src\Nuclei.Nunit.Extensions" />
   </files>
 </package>
