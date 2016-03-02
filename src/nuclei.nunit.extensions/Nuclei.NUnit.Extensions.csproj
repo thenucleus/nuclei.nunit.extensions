@@ -66,8 +66,6 @@
       <Link>Properties\AssemblyInfo.Base.cs</Link>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.BuildInformation.cs" />
-    <Compile Include="Properties\AssemblyInfo.Company.cs" />
-    <Compile Include="Properties\AssemblyInfo.VersionNumber.cs" />
     <Compile Include="AssertExtensions.cs" />
     <Compile Include="ChiSquareTest.cs" />
     <Compile Include="EqualityContractVerifierTest.cs" />
