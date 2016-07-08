@@ -1,6 +1,7 @@
 ﻿//-----------------------------------------------------------------------
-// <copyright company="Nuclei">
-//     Copyright 2013 Nuclei. Licensed under the Apache License, Version 2.0.
+// <copyright company="TheNucleus">
+// Copyright (c) TheNucleus. All rights reserved.
+// Licensed under the Apache License, Version 2.0 license. See LICENCE.md file in the project root for full license information.
 // </copyright>
 //-----------------------------------------------------------------------
 
@@ -12,16 +13,19 @@ namespace Nuclei.Nunit.Extensions
     /// Stores a number of hashcodes for use in collision calculations.
     /// </summary>
     /// <remarks>
-    /// This code is based on, but not exactly the same as, the code of the hashcode contract verifier in the MbUnit 
+    /// This code is based on, but not exactly the same as, the code of the hashcode contract verifier in the MbUnit
     /// project which is licensed under the Apache License 2.0. More information can be found at:
     /// https://code.google.com/p/mb-unit/.
     /// </remarks>
     internal sealed class HashStore
     {
-        private readonly IDictionary<int, int> m_More = new Dictionary<int, int>();
-        private readonly HashSet<int> m_One = new HashSet<int>();
-        private readonly HashStoreResult m_Result;
-        private readonly HashSet<int> m_Two = new HashSet<int>();
+        private readonly IDictionary<int, int> _more = new Dictionary<int, int>();
+
+        private readonly HashSet<int> _one = new HashSet<int>();
+
+        private readonly HashStoreResult _result;
+
+        private readonly HashSet<int> _two = new HashSet<int>();
 
         /// <summary>
         /// Initializes a new instance of the <see cref="HashStore"/> class.
@@ -41,31 +45,31 @@ namespace Nuclei.Nunit.Extensions
                 throw new NotEnoughHashesException(2, actual);
             }
 
-            m_Result = CalculateResults(actual);
+            _result = CalculateResults(actual);
         }
 
         private void Add(int hash)
         {
-            if (m_One.Contains(hash))
+            if (_one.Contains(hash))
             {
-                m_One.Remove(hash);
-                m_Two.Add(hash);
+                _one.Remove(hash);
+                _two.Add(hash);
             }
-            else if (m_Two.Contains(hash))
+            else if (_two.Contains(hash))
             {
-                m_Two.Remove(hash);
-                m_More.Add(hash, 3);
+                _two.Remove(hash);
+                _more.Add(hash, 3);
             }
             else
             {
                 int num;
-                if (m_More.TryGetValue(hash, out num))
+                if (_more.TryGetValue(hash, out num))
                 {
-                    m_More[hash] = 1 + num;
+                    _more[hash] = 1 + num;
                 }
                 else
                 {
-                    m_One.Add(hash);
+                    _one.Add(hash);
                 }
             }
         }
@@ -76,18 +80,18 @@ namespace Nuclei.Nunit.Extensions
             var actual = new double[bucketSize];
             double collisionProbability = 0.0;
             int num3 = 0;
-            for (int i = 0; i < m_One.Count; i++)
+            for (int i = 0; i < _one.Count; i++)
             {
                 actual[num3++ % bucketSize]++;
             }
 
-            for (int j = 0; j < m_Two.Count; j++)
+            for (int j = 0; j < _two.Count; j++)
             {
                 actual[num3++ % bucketSize] += 2.0;
                 collisionProbability += 2.0 / (count * (count - 1));
             }
 
-            foreach (KeyValuePair<int, int> pair in m_More)
+            foreach (KeyValuePair<int, int> pair in _more)
             {
                 actual[num3++ % bucketSize] += pair.Value;
                 collisionProbability += ((pair.Value / ((double)count)) * (pair.Value - 1)) / (count - 1);
@@ -100,7 +104,7 @@ namespace Nuclei.Nunit.Extensions
         private int GetBucketSize()
         {
             var numArray = new[] { 0x39dd, 0xe1d, 0xdf, 0x11 };
-            int num = (m_One.Count + this.m_Two.Count) + m_More.Count;
+            int num = (_one.Count + this._two.Count) + _more.Count;
             foreach (int num2 in numArray)
             {
                 if (num >= (num2 * 10))
@@ -112,35 +116,11 @@ namespace Nuclei.Nunit.Extensions
             return num;
         }
 
-        internal int this[int hash]
-        {
-            get
-            {
-                int num;
-                if (m_One.Contains(hash))
-                {
-                    return 1;
-                }
-
-                if (m_Two.Contains(hash))
-                {
-                    return 2;
-                }
-
-                if (!m_More.TryGetValue(hash, out num))
-                {
-                    return 0;
-                }
-
-                return num;
-            }
-        }
-
         public HashStoreResult Result
         {
             get
             {
-                return m_Result;
+                return _result;
             }
         }
     }

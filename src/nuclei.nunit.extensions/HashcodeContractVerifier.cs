@@ -1,10 +1,12 @@
 ﻿//-----------------------------------------------------------------------
-// <copyright company="Nuclei">
-//     Copyright 2013 Nuclei. Licensed under the Apache License, Version 2.0.
+// <copyright company="TheNucleus">
+// Copyright (c) TheNucleus. All rights reserved.
+// Licensed under the Apache License, Version 2.0 license. See LICENCE.md file in the project root for full license information.
 // </copyright>
 //-----------------------------------------------------------------------
 
 using System.Collections.Generic;
+using System.Diagnostics.CodeAnalysis;
 using NUnit.Framework;
 
 namespace Nuclei.Nunit.Extensions
@@ -14,20 +16,25 @@ namespace Nuclei.Nunit.Extensions
     /// correctly implemented.
     /// </summary>
     /// <remarks>
-    /// This code is based on, but not exactly the same as, the code of the hashcode contract verifier in the MbUnit 
+    /// This code is based on, but not exactly the same as, the code of the hashcode contract verifier in the MbUnit
     /// project which is licensed under the Apache License 2.0. More information can be found at:
     /// https://code.google.com/p/mb-unit/.
     /// </remarks>
-    public abstract class HashcodeContractVerifier
+    public abstract class HashCodeContractVerifier
     {
         private const double CollisionProbabilityLimit = 0.01;
+
         private const double UniformDistributionQualityLimit = 0.01;
 
         /// <summary>
         /// Returns a collection of hashcodes.
         /// </summary>
         /// <returns>The collection containing the hashcodes.</returns>
-        protected abstract IEnumerable<int> GetHashcodes();
+        [SuppressMessage(
+            "Microsoft.Design",
+            "CA1024:UsePropertiesWhereAppropriate",
+            Justification = "This method may be expensive.")]
+        protected abstract IEnumerable<int> GetHashCodes();
 
         /// <summary>
         /// Verifies that the probability of a hashcode collision is lower than the desired limit.
@@ -50,7 +57,7 @@ namespace Nuclei.Nunit.Extensions
 
         private HashStoreResult GetResult()
         {
-            var store = new HashStore(GetHashcodes());
+            var store = new HashStore(GetHashCodes());
             return store.Result;
         }
 

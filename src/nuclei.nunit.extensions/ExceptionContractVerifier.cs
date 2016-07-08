@@ -1,10 +1,12 @@
 //-----------------------------------------------------------------------
-// <copyright company="Nuclei">
-//     Copyright 2013 Nuclei. Licensed under the Apache License, Version 2.0.
+// <copyright company="TheNucleus">
+// Copyright (c) TheNucleus. All rights reserved.
+// Licensed under the Apache License, Version 2.0 license. See LICENCE.md file in the project root for full license information.
 // </copyright>
 //-----------------------------------------------------------------------
 
 using System;
+using System.Diagnostics.CodeAnalysis;
 using System.Reflection;
 using System.Runtime.Serialization;
 using NUnit.Framework;
@@ -16,11 +18,12 @@ namespace Nuclei.Nunit.Extensions
     /// </summary>
     /// <typeparam name="TException">The type of the exception that is being tested.</typeparam>
     /// <remarks>
-    /// This code is based on, but not exactly the same as, the code of the exception contract verifier in the MbUnit 
+    /// This code is based on, but not exactly the same as, the code of the exception contract verifier in the MbUnit
     /// project which is licensed under the Apache License 2.0. More information can be found at:
     /// https://code.google.com/p/mb-unit/.
     /// </remarks>
-    public abstract class ExceptionContractVerifier<TException> where TException : Exception
+    public abstract class ExceptionContractVerifier<TException>
+        where TException : Exception
     {
         /// <summary>
         /// Verifies that the exception is marked with the <c>SerializableAttribute</c>.
@@ -70,6 +73,10 @@ namespace Nuclei.Nunit.Extensions
         /// Verifies that the exception has a constructor that takes both an inner exception and a message.
         /// </summary>
         [Test]
+        [SuppressMessage(
+            "Microsoft.Usage",
+            "CA2201:DoNotRaiseReservedExceptionTypes",
+            Justification = "Not actually throwing the exception. We just need an exception to store.")]
         public void HasMessageAndExceptionConstructor()
         {
             var constructor = typeof(TException).GetConstructor(
@@ -86,8 +93,8 @@ namespace Nuclei.Nunit.Extensions
             var text = "a";
             var inner = new Exception();
             var instance = (TException)constructor.Invoke(
-                new object[] 
-                { 
+                new object[]
+                {
                     text,
                     inner
                 });
@@ -118,6 +125,10 @@ namespace Nuclei.Nunit.Extensions
         /// the inner exception and the message.
         /// </summary>
         [Test]
+        [SuppressMessage(
+            "Microsoft.Usage",
+            "CA2201:DoNotRaiseReservedExceptionTypes",
+            Justification = "Not actually throwing the exception. We just need an exception to store.")]
         public void RoundTripSerializeAndDeserialize()
         {
             var constructor = typeof(TException).GetConstructor(
@@ -134,8 +145,8 @@ namespace Nuclei.Nunit.Extensions
             var text = "a";
             var inner = new Exception();
             var instance = (TException)constructor.Invoke(
-                new object[] 
-                { 
+                new object[]
+                {
                     text,
                     inner
                 });
