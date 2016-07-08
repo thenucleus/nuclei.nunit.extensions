@@ -1,6 +1,7 @@
 ﻿//-----------------------------------------------------------------------
-// <copyright company="Nuclei">
-//     Copyright 2013 Nuclei. Licensed under the Apache License, Version 2.0.
+// <copyright company="TheNucleus">
+// Copyright (c) TheNucleus. All rights reserved.
+// Licensed under the Apache License, Version 2.0 license. See LICENCE.md file in the project root for full license information.
 // </copyright>
 //-----------------------------------------------------------------------
 
@@ -13,10 +14,10 @@ namespace Nuclei.Nunit.Extensions
     /// <remarks>
     /// <para>
     /// The interface is defined so that the <see cref="EqualityContractVerifierTest"/> can
-    /// call methods on a non-generic object, while the user can provide a generic class. 
+    /// call methods on a non-generic object, while the user can provide a generic class.
     /// </para>
     /// <para>
-    /// This code is based on, but not exactly the same as, the code of the hashcode contract verifier in the MbUnit 
+    /// This code is based on, but not exactly the same as, the code of the hashcode contract verifier in the MbUnit
     /// project which is licensed under the Apache License 2.0. More information can be found at:
     /// https://code.google.com/p/mb-unit/
     /// </para>
@@ -109,6 +110,6 @@ namespace Nuclei.Nunit.Extensions
         /// Tests whether <c>object.GetHashcode()</c> returns the same value
         /// for two equal objects.
         /// </summary>
-        void HashcodeComparisonForEqualObjects();
+        void HashCodeComparisonForEqualObjects();
     }
 }

@@ -124,7 +124,6 @@ AppPackages/
 sql/
 *.Cache
 ClientBin/
-[Ss]tyle[Cc]op.*
 ~$*
 *~
 *.dbmdl
@@ -164,3 +163,5 @@ $RECYCLE.BIN/
 .DS_Store
 AssemblyInfo.Company.cs
 *.ide
+_site/
+.vs/

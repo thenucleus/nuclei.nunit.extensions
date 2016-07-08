@@ -1,6 +1,7 @@
 //-----------------------------------------------------------------------
-// <copyright company="Nuclei">
-//     Copyright 2013 Nuclei. Licensed under the Apache License, Version 2.0.
+// <copyright company="TheNucleus">
+// Copyright (c) TheNucleus. All rights reserved.
+// Licensed under the Apache License, Version 2.0 license. See LICENCE.md file in the project root for full license information.
 // </copyright>
 //-----------------------------------------------------------------------
 
@@ -13,7 +14,7 @@ namespace Nuclei.Nunit.Extensions
     /// Defines additional methods useful during testing.
     /// </summary>
     /// <remarks>
-    /// This code is based on the code for the RoundTripSerialize method in the MbUnit 
+    /// This code is based on the code for the RoundTripSerialize method in the MbUnit
     /// project which is licensed under the Apache License 2.0. More information can be found at:
     /// https://code.google.com/p/mb-unit/.
     /// </remarks>

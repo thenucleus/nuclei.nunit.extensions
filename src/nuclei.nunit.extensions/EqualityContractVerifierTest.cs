@@ -1,6 +1,7 @@
 //-----------------------------------------------------------------------
-// <copyright company="Nuclei">
-//     Copyright 2013 Nuclei. Licensed under the Apache License, Version 2.0.
+// <copyright company="TheNucleus">
+// Copyright (c) TheNucleus. All rights reserved.
+// Licensed under the Apache License, Version 2.0 license. See LICENCE.md file in the project root for full license information.
 // </copyright>
 //-----------------------------------------------------------------------
 
@@ -13,11 +14,11 @@ namespace Nuclei.Nunit.Extensions
     /// and the <c>==</c> and <c>!=</c> operators are implemented correctly.
     /// </summary>
     /// <remarks>
-    /// This code is based on, but not exactly the same as, the code of the equality contract verifier in the MbUnit 
+    /// This code is based on, but not exactly the same as, the code of the equality contract verifier in the MbUnit
     /// project which is licensed under the Apache License 2.0. More information can be found at:
     /// https://code.google.com/p/mb-unit/.
     /// </remarks>
-    public abstract class EqualityContractVerifierTest : HashcodeContractVerifierTest
+    public abstract class EqualityContractVerifierTest : HashCodeContractVerifierTest
     {
         /// <summary>
         /// Gets the object that provides the objects to be compared.
@@ -170,9 +171,9 @@ namespace Nuclei.Nunit.Extensions
         /// for two equal objects.
         /// </summary>
         [Test]
-        public void HashcodeComparisonForEqualObjects()
+        public void HashCodeComparisonForEqualObjects()
         {
-            EqualityContract.HashcodeComparisonForEqualObjects();
+            EqualityContract.HashCodeComparisonForEqualObjects();
         }
     }
 }

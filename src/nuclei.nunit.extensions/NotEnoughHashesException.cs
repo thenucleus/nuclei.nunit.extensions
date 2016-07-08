@@ -1,6 +1,7 @@
 ﻿//-----------------------------------------------------------------------
-// <copyright company="Nuclei">
-//     Copyright 2013 Nuclei. Licensed under the Apache License, Version 2.0.
+// <copyright company="TheNucleus">
+// Copyright (c) TheNucleus. All rights reserved.
+// Licensed under the Apache License, Version 2.0 license. See LICENCE.md file in the project root for full license information.
 // </copyright>
 //-----------------------------------------------------------------------
 
@@ -12,14 +13,17 @@ using System.Runtime.Serialization;
 namespace Nuclei.Nunit.Extensions
 {
     /// <summary>
-    /// An exception thrown if not enough hashcodes are provided to the <see cref="HashcodeContractVerifier"/>.
+    /// An exception thrown if not enough hashcodes are provided to the <see cref="HashCodeContractVerifier"/>.
     /// </summary>
     /// <remarks>
-    /// This code is based on, but not exactly the same as, the code of the hashcode contract verifier in the MbUnit 
+    /// This code is based on, but not exactly the same as, the code of the hashcode contract verifier in the MbUnit
     /// project which is licensed under the Apache License 2.0. More information can be found at:
     /// https://code.google.com/p/mb-unit/.
     /// </remarks>
-    [SuppressMessage("Microsoft.StyleCop.CSharp.DocumentationRules", "SA1600:ElementsMustBeDocumented",
+    [Serializable]
+    [SuppressMessage(
+        "Microsoft.StyleCop.CSharp.DocumentationRules",
+        "SA1600:ElementsMustBeDocumented",
         Justification = "Unit tests do not need documentation.")]
     public sealed class NotEnoughHashesException : Exception
     {
@@ -69,7 +73,7 @@ namespace Nuclei.Nunit.Extensions
         /// Initializes a new instance of the <see cref="NotEnoughHashesException"/> class.
         /// </summary>
         /// <param name="info">
-        ///     The <see cref="T:System.Runtime.Serialization.SerializationInfo"/> that holds the serialized 
+        ///     The <see cref="T:System.Runtime.Serialization.SerializationInfo"/> that holds the serialized
         ///     object data about the exception being thrown.
         /// </param>
         /// <param name="context">
