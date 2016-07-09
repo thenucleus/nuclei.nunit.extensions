@@ -1,0 +1,437 @@
+<!DOCTYPE html>
+<!--[if IE]><![endif]-->
+<html>
+  
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <title>Nuclei.Nunit.Extensions </title>
+    <meta name="viewport" content="width=device-width">
+    <meta name="title" content="Nuclei.Nunit.Extensions ">
+    <meta name="generator" content="docfx 2.1.0.0">
+    
+    <link rel="shortcut icon" href="../favicon.ico">
+    <link rel="stylesheet" href="../styles/docfx.vendor.css">
+    <link rel="stylesheet" href="../styles/docfx.css">
+    <link rel="stylesheet" href="../styles/main.css">
+    <meta property="docfx:navrel" content="../toc.html">
+    <meta property="docfx:tocrel" content="toc.html">
+    
+  </head>
+  <body data-spy="scroll" data-target="#affix">
+    <div id="wrapper">
+      <header>
+        
+        <nav id="autocollapse" class="navbar navbar-inverse ng-scope" role="navigation">
+          <div class="container">
+            <div class="navbar-header">
+              <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#navbar">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+              </button>
+              <a class="navbar-brand" href="../index.html">
+                <img id="logo" class="svg" src="../logo.svg" alt="">
+              </a>
+            </div>
+            <div class="collapse navbar-collapse" id="navbar">
+              <form class="navbar-form navbar-right" role="search" id="search">
+                <div class="form-group">
+                  <input type="text" class="form-control" id="search-query" placeholder="Search" autocomplete="off">
+                </div>
+              </form>
+            </div>
+          </div>
+        </nav>
+        
+        <div class="subnav navbar navbar-default">
+          <div class="container hide-when-search" id="breadcrumb">
+            <ul class="breadcrumb">
+              <li></li>
+            </ul>
+          </div>
+        </div>
+      </header>
+      <div role="main" class="container body-content hide-when-search">
+        
+        <div class="sidenav hide-when-search">
+          <a class="btn toc-toggle collapse" data-toggle="collapse" href="#sidetoggle" aria-expanded="false" aria-controls="sidetoggle">Show / Hide Table of Contents</a>
+          <div class="sidetoggle collapse" id="sidetoggle">
+            <div id="sidetoc"></div>
+          </div>
+        </div>
+        <div class="article row grid-right">
+          <div class="col-md-10">
+            <article class="content wrap" id="_content" data-uid="">
+              <a href="https://github.com/thenucleus/nuclei.nunit.extensions/blob/master/doc/Nuclei.Nunit.Extensions.Documentation/api/index.md/#L1" class="btn btn-primary pull-right mobile-hide">Improve this Doc</a>
+              <h1 id="nuclei-nunit-extensions">Nuclei.Nunit.Extensions</h1>
+              
+<p>The following class will be used in the samples below:</p>
+<pre><code class="lang-csharp" name="ExampleObject">using System;
+using System.Diagnostics.CodeAnalysis;
+
+namespace Nuclei.Nunit.Extensions.Samples
+{
+    /// &lt;summary&gt;
+    /// Defines a serializable object that stores a name.
+    /// &lt;/summary&gt;
+    [Serializable]
+    public sealed class NameObject : IEquatable&lt;NameObject&gt;
+    {
+        /// &lt;summary&gt;
+        /// Implements the operator ==.
+        /// &lt;/summary&gt;
+        /// &lt;param name=&quot;first&quot;&gt;The first object.&lt;/param&gt;
+        /// &lt;param name=&quot;second&quot;&gt;The second object.&lt;/param&gt;
+        /// &lt;returns&gt;The result of the operator.&lt;/returns&gt;
+        public static bool operator ==(NameObject first, NameObject second)
+        {
+            // Check if first is a null reference by using ReferenceEquals because
+            // we overload the == operator. If first isn&#39;t actually null then
+            // we get an infinite loop where we&#39;re constantly trying to compare to null.
+            if (ReferenceEquals(first, null) &amp;&amp; ReferenceEquals(second, null))
+            {
+                return true;
+            }
+
+            var nonNullObject = first;
+            var possibleNullObject = second;
+            if (ReferenceEquals(first, null))
+            {
+                nonNullObject = second;
+                possibleNullObject = first;
+            }
+
+            return nonNullObject.Equals(possibleNullObject);
+        }
+
+        /// &lt;summary&gt;
+        /// Implements the operator !=.
+        /// &lt;/summary&gt;
+        /// &lt;param name=&quot;first&quot;&gt;The first object.&lt;/param&gt;
+        /// &lt;param name=&quot;second&quot;&gt;The second object.&lt;/param&gt;
+        /// &lt;returns&gt;The result of the operator.&lt;/returns&gt;
+        public static bool operator !=(NameObject first, NameObject second)
+        {
+            // Check if first is a null reference by using ReferenceEquals because
+            // we overload the == operator. If first isn&#39;t actually null then
+            // we get an infinite loop where we&#39;re constantly trying to compare to null.
+            if (ReferenceEquals(first, null) &amp;&amp; ReferenceEquals(second, null))
+            {
+                return false;
+            }
+
+            var nonNullObject = first;
+            var possibleNullObject = second;
+            if (ReferenceEquals(first, null))
+            {
+                nonNullObject = second;
+                possibleNullObject = first;
+            }
+
+            return !nonNullObject.Equals(possibleNullObject);
+        }
+
+        /// &lt;summary&gt;
+        /// The name of the object.
+        /// &lt;/summary&gt;
+        private readonly string _name;
+
+        /// &lt;summary&gt;
+        /// Initializes a new instance of the &lt;see cref=&quot;NameObject&quot;/&gt; class.
+        /// &lt;/summary&gt;
+        /// &lt;param name=&quot;name&quot;&gt;The name of the object.&lt;/param&gt;
+        /// &lt;exception cref=&quot;ArgumentNullException&quot;&gt;
+        ///     Thrown if &lt;paramref name=&quot;name&quot;/&gt; is &lt;see langword=&quot;null&quot; /&gt;.
+        /// &lt;/exception&gt;
+        public NameObject(string name)
+        {
+            if (name == null)
+            {
+                throw new ArgumentNullException(&quot;name&quot;);
+            }
+
+            _name = name;
+        }
+
+        /// &lt;summary&gt;
+        /// Gets the name of the assembly.
+        /// &lt;/summary&gt;
+        public string Name
+        {
+            get
+            {
+                return _name;
+            }
+        }
+
+        /// &lt;summary&gt;
+        /// Determines whether the specified &lt;see cref=&quot;NameObject&quot;/&gt; is equal to this instance.
+        /// &lt;/summary&gt;
+        /// &lt;param name=&quot;other&quot;&gt;The &lt;see cref=&quot;NameObject&quot;/&gt; to compare with this instance.&lt;/param&gt;
+        /// &lt;returns&gt;
+        ///     &lt;see langword=&quot;true&quot;/&gt; if the specified &lt;see cref=&quot;NameObject&quot;/&gt; is equal to this instance;
+        ///     otherwise, &lt;see langword=&quot;false&quot;/&gt;.
+        /// &lt;/returns&gt;
+        [SuppressMessage(
+            &quot;Microsoft.StyleCop.CSharp.DocumentationRules&quot;,
+            &quot;SA1628:DocumentationTextMustBeginWithACapitalLetter&quot;,
+            Justification = &quot;Documentation can start with a language keyword&quot;)]
+        public bool Equals(NameObject other)
+        {
+            if (ReferenceEquals(this, other))
+            {
+                return true;
+            }
+
+            // Check if other is a null reference by using ReferenceEquals because
+            // we overload the == operator. If other isn&#39;t actually null then
+            // we get an infinite loop where we&#39;re constantly trying to compare to null.
+            return !ReferenceEquals(other, null)
+                &amp;&amp; string.Equals(Name, other.Name, StringComparison.OrdinalIgnoreCase);
+        }
+
+        /// &lt;summary&gt;
+        /// Determines whether the specified &lt;see cref=&quot;object&quot;/&gt; is equal to this instance.
+        /// &lt;/summary&gt;
+        /// &lt;param name=&quot;obj&quot;&gt;The &lt;see cref=&quot;object&quot;/&gt; to compare with this instance.&lt;/param&gt;
+        /// &lt;returns&gt;
+        ///     &lt;see langword=&quot;true&quot;/&gt; if the specified &lt;see cref=&quot;object&quot;/&gt; is equal to this instance;
+        ///     otherwise, &lt;see langword=&quot;false&quot;/&gt;.
+        /// &lt;/returns&gt;
+        [SuppressMessage(
+            &quot;Microsoft.StyleCop.CSharp.DocumentationRules&quot;,
+            &quot;SA1628:DocumentationTextMustBeginWithACapitalLetter&quot;,
+            Justification = &quot;Documentation can start with a language keyword&quot;)]
+        public sealed override bool Equals(object obj)
+        {
+            if (ReferenceEquals(this, obj))
+            {
+                return true;
+            }
+
+            var id = obj as NameObject;
+            return Equals(id);
+        }
+
+        /// &lt;summary&gt;
+        /// Returns a hash code for this instance.
+        /// &lt;/summary&gt;
+        /// &lt;returns&gt;
+        /// A hash code for this instance, suitable for use in hashing algorithms and data structures like a hash table.
+        /// &lt;/returns&gt;
+        public override int GetHashCode()
+        {
+            // As obtained from the Jon Skeet answer to:
+            // http://stackoverflow.com/questions/263400/what-is-the-best-algorithm-for-an-overridden-system-object-gethashcode
+            // And adapted towards the Modified Bernstein (shown here: http://eternallyconfuzzled.com/tuts/algorithms/jsw_tut_hashing.aspx)
+            //
+            // Overflow is fine, just wrap
+            unchecked
+            {
+                // Pick a random prime number
+                int hash = 17;
+
+                // Mash the hash together with yet another random prime number
+                hash = (hash * 23) ^ Name.GetHashCode();
+
+                return hash;
+            }
+        }
+
+        /// &lt;summary&gt;
+        /// Returns a &lt;see cref=&quot;string&quot;/&gt; that represents this instance.
+        /// &lt;/summary&gt;
+        /// &lt;returns&gt;
+        /// A &lt;see cref=&quot;string&quot;/&gt; that represents this instance.
+        /// &lt;/returns&gt;
+        public override string ToString()
+        {
+            return Name;
+        }
+    }
+}
+</code></pre><h2 id="testing-serialization">Testing serialization</h2>
+<p>To test the ability to serialize and deserialize without losing information you can use the <code>RoundTripSerialize</code> method on the <code>AssertExtensions</code> class.
+This method will serialize an object instance and then deserialize it, returning a new instance. This instance can then be compared to the original.</p>
+<pre><code class="lang-csharp" name="RoundTripTest">[Test]
+public void RoundTripSerialize()
+{
+    var original = new NameObject(&quot;my_cool_name&quot;);
+    var copy = AssertExtensions.RoundTripSerialize(original);
+
+    Assert.AreEqual(original, copy);
+}
+</code></pre><h2 id="testing-gethashcode-implementations">Testing GetHashCode implementations</h2>
+<p>To verify that the <code>GetHashCode</code> method is implemented correctly create a test that derives from the <code>HashCodeContractVerifierTest</code> class and provide
+an implementation of the <code>HashCodeContractVerifier</code> class.</p>
+<pre><code class="lang-csharp" name="HashCodeContractVerification">
+private sealed class NameObjectHashCodeContractVerfier : HashCodeContractVerifier
+{
+    private readonly IEnumerable&lt;NameObject&gt; _distinctInstances
+        = new List&lt;NameObject&gt;
+             {
+                new NameObject(&quot;a&quot;),
+                new NameObject(&quot;b&quot;),
+                new NameObject(&quot;c&quot;),
+                new NameObject(&quot;d&quot;),
+                new NameObject(&quot;e&quot;),
+                new NameObject(&quot;f&quot;),
+                new NameObject(&quot;g&quot;),
+                new NameObject(&quot;h&quot;),
+             };
+
+    protected override IEnumerable&lt;int&gt; GetHashCodes()
+    {
+        return _distinctInstances.Select(i =&gt; i.GetHashCode());
+    }
+}
+
+private readonly NameObjectHashCodeContractVerfier _hashCodeVerifier
+    = new NameObjectHashCodeContractVerfier();
+
+/// &lt;summary&gt;
+/// Gets an instance of the hashcode contract verifier for use in the tests.
+/// &lt;/summary&gt;
+protected override HashCodeContractVerifier HashContract
+{
+    get
+    {
+        return _hashCodeVerifier;
+    }
+}
+</code></pre><p>The test will verify that:</p>
+<ul>
+<li>The collison probability is less than 1%</li>
+<li>The distribution of the hash codes is uniform</li>
+</ul>
+<h2 id="testing-equality-implementations">Testing equality implementations</h2>
+<p>To verify that the equality methods (<code>object.Equals</code>, <code>IEquatable&lt;T&gt;.Equals</code>) and operators are implemented correctly create a test that derives from the
+<code>EqualityContractVerifierTest</code> class and provide an implementation of the <code>EqualityContractVerifier</code> class.</p>
+<pre><code class="lang-csharp" name="EqualityContractVerification">private sealed class NameObjectEqualityContractVerifier : EqualityContractVerifier&lt;NameObject&gt;
+{
+    private readonly NameObject _first = new NameObject(&quot;a&quot;);
+
+    private readonly NameObject _second = new NameObject(&quot;b&quot;);
+
+    /// &lt;summary&gt;
+    /// Creates a deep copy of the given object.
+    /// &lt;/summary&gt;
+    /// &lt;remarks&gt;
+    /// This method is used to create identical objects that are not referentially identical.
+    /// &lt;/remarks&gt;
+    /// &lt;param name=&quot;original&quot;&gt;The original object that should be copied.&lt;/param&gt;
+    /// &lt;returns&gt;A new instance that contains the same values as the original object.&lt;/returns&gt;
+    protected override NameObject Copy(NameObject original)
+    {
+        return new NameObject(original.Name);
+    }
+
+    /// &lt;summary&gt;
+    /// Gets the first object that should be used in equality comparisons.
+    /// &lt;/summary&gt;
+    protected override NameObject FirstInstance
+    {
+        get
+        {
+            return _first;
+        }
+    }
+
+    /// &lt;summary&gt;
+    /// Gets the second object that should be used in equality comparisons.
+    /// &lt;/summary&gt;
+    protected override NameObject SecondInstance
+    {
+        get
+        {
+            return _second;
+        }
+    }
+
+    /// &lt;summary&gt;
+    /// Gets a value indicating whether operator overloads are defined for the type.
+    /// &lt;/summary&gt;
+    protected override bool HasOperatorOverloads
+    {
+        get
+        {
+            return true;
+        }
+    }
+}
+
+private readonly NameObjectEqualityContractVerifier _equalityVerifier
+    = new NameObjectEqualityContractVerifier();
+
+/// &lt;summary&gt;
+/// Gets the object that provides the objects to be compared.
+/// &lt;/summary&gt;
+protected override IEqualityContractVerifier EqualityContract
+{
+    get
+    {
+        return _equalityVerifier;
+    }
+}
+</code></pre><p>The test will verify that:</p>
+<ul>
+<li><code>object.Equals</code> is implemented correctly:<ul>
+<li>An instance and it&#39;s deep clone are equal</li>
+<li>An instance is not equal to <code>null</code></li>
+<li>An instance is not equal to an instance with different values</li>
+<li>An instance is not equal to an instance of a different type</li>
+</ul>
+</li>
+<li>If the class implements <code>IEquatable&lt;T&gt;.Equals</code> that it is implemented correctly<ul>
+<li>An instance and it&#39;s deep clone are equal</li>
+<li>An instance is not equal to an instance with different values</li>
+</ul>
+</li>
+<li>If the equality operators (<code>==</code> and <code>!=</code>) are overloaded that they are implemented correctly<ul>
+<li>The equals operator returns <code>true</code> when comparing an instance and it&#39;s deep clone</li>
+<li>The equals operator returns <code>false</code> when comparing an instance and an instance with different values</li>
+<li>The equals operator returns <code>false</code> when comparing an instance to <code>null</code></li>
+<li>The equals operator returns <code>false</code> when comparing <code>null</code> to an instance</li>
+<li>The inequals operator returns <code>false</code> when comparing an instance and it&#39;s deep clone</li>
+<li>The inequals operator returns <code>true</code> when comparing an instance and an instance with different values</li>
+<li>The inequals operator returns <code>true</code> when comparing an instance to <code>null</code></li>
+<li>The inequals operator returns <code>true</code> when comparing <code>null</code> to an instance</li>
+</ul>
+</li>
+<li>The hash codes for two equal instances are the same</li>
+</ul>
+<p>Note that deriving from the <code>EqualityContractVerifierTest</code> also implies deriving from the <code>HashCodeContractVerifierTest</code>.</p>
+
+            </article>
+          </div>
+          
+          <div class="hidden-sm col-md-2" role="complementary">
+            <nav class="bs-docs-sidebar hidden-print hidden-xs hidden-sm affix" id="affix">
+            <!-- <p><a class="back-to-top" href="#top">Back to top</a><p> -->
+            </nav>
+          </div>
+        </div>
+      </div>
+      
+      <footer>
+        <div class="grad-bottom"></div>
+        <div class="footer">
+          <div class="container">
+            <span class="pull-right">
+              <a href="#top">Back to top</a>
+            </span>
+            Copyright (c) - TheNucleus 2013 - 2016. All rights reserved.
+            
+          </div>
+        </div>
+      </footer>
+    </div>
+    
+    <script type="text/javascript" src="../styles/docfx.vendor.js"></script>
+    <script type="text/javascript" src="../styles/docfx.js"></script>
+    <script type="text/javascript" src="../styles/main.js"></script>
+    <script>hljs.initHighlightingOnLoad();</script>
+  </body>
+</html>
