@@ -212,7 +212,6 @@
             </Groups>
         </BuildStepsToExecute>
 
-        <!--
         <BuildStepsToExecute Include="$(BuildStepsUnitTestNUnit)">
             <Properties>
                 Configuration=$(TestConfiguration);
@@ -222,7 +221,6 @@
                 UnitTest;
             </Groups>
         </BuildStepsToExecute>
-        -->
         <!--
         <BuildStepsToExecute Include="$(BuildStepsUnitTestMsTest)">
             <Properties>
@@ -331,10 +329,8 @@
         **** PREPARE - UPDATE ASSEMBLY INFO FILES ****
     -->
     <ItemGroup>
-        <!--
         <AssemblyInfoFilesToUpdate Include="$(DirSrc)\**\AssemblyInfo.cs" />
-        <AssemblyInfoFilesToUpdate Include="$(DirSrc)\**\AssemblyInfo.vb" />
-        -->
+        <AssemblyInfoFilesToUpdate Include="$(DirDoc)\**\AssemblyInfo.cs" />
     </ItemGroup>
 
 
@@ -510,7 +506,7 @@
             The ItemGroup items that define which files contain the unit test cases. Paths can include build templates,
             e.g. $(DirBuildBinPlatformConfig)\${VersionMajor}.0\**\test*.dll
         -->
-        <!-- <UnitTestAssemblies Include="$(DirSrc)\**\bin\$(Configuration)\**\$(UnitTestAssemblyNamePrefix)*.dll" /> -->
+        <UnitTestAssemblies Include="$(DirDoc)\**\bin\$(Configuration)\**\*.Samples.dll" />
     </ItemGroup>
     <ItemGroup>
         <!--
