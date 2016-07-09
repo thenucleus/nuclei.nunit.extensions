@@ -165,3 +165,4 @@ AssemblyInfo.Company.cs
 *.ide
 _site/
 .vs/
+doc/Nuclei.Nunit.Extensions.Documentation/docfx.json

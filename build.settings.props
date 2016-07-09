@@ -178,7 +178,6 @@
             </Groups>
         </BuildStepsToExecute>
         -->
-        <!--
         <BuildStepsToExecute Include="$(BuildStepsPrepareGenerateFiles)">
             <Properties>
             </Properties>
@@ -187,7 +186,6 @@
                 Prepare;
             </Groups>
         </BuildStepsToExecute>
-        -->
 
         <!--
         <BuildStepsToExecute Include="$(BuildStepsAnalyzeSourceCcm)">
@@ -352,18 +350,10 @@
         Additional parameters can be provided through the 'TemplateTokens' ItemGroup below.
     -->
     <ItemGroup>
-        <!--
-        <BuildFilesToGenerate Include="$(DirBuildTemp)\MyFile.txt">
-            <Template>$(DirTemplates)\MyTemplatefile.txt</Template>
+        <BuildFilesToGenerate Include="$(DirDoc)\Nuclei.Nunit.Extensions.Documentation\docfx.json">
+            <Template>$(DirDoc)\Nuclei.Nunit.Extensions.Documentation\template.docfx.json</Template>
             <Encoding>UTF-8</Encoding>
         </BuildFilesToGenerate>
-        <BuildFilesToGenerate Include="$(DirBuildTemp)\MyOtherFile.txt">
-            <Template>$(DirTemplates)\MyOtherTemplatefile.txt</Template>
-            <Token>MyAdditionalTemplateParameter</Token>
-            <ReplacementValue>MyAdditionalTemplateValue</ReplacementValue>
-            <Encoding>UTF-8</Encoding>
-        </BuildFilesToGenerate>
-        -->
     </ItemGroup>
 
 
