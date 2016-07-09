@@ -54,7 +54,6 @@
     <Reference Include="System.EnterpriseServices" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="packages.config" />
     <Content Include="toc.yml" />
     <Content Include="index.md" />
     <Content Include="docfx.json" />
@@ -68,6 +67,12 @@
       <Project>{95F183AF-7BBA-4ECE-AC1C-EE006317470D}</Project>
       <Name>Nuclei.Nunit.Extensions</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="template.docfx.json" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
@@ -94,13 +99,13 @@
       </FlavorProperties>
     </VisualStudio>
   </ProjectExtensions>
+  <Import Project="..\..\packages\docfx.msbuild.2.1.0\build\docfx.msbuild.targets" Condition="Exists('..\..\packages\docfx.msbuild.2.1.0\build\docfx.msbuild.targets')" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
     <PropertyGroup>
       <ErrorText>This project references NuGet package(s) that are missing on this computer. Use NuGet Package Restore to download them.  For more information, see http://go.microsoft.com/fwlink/?LinkID=322105. The missing file is {0}.</ErrorText>
     </PropertyGroup>
-    <Error Condition="!Exists('..\..\packages\docfx.msbuild.2.0.1\build\docfx.msbuild.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\..\packages\docfx.msbuild.2.0.1\build\docfx.msbuild.targets'))" />
+    <Error Condition="!Exists('..\..\packages\docfx.msbuild.2.1.0\build\docfx.msbuild.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\..\packages\docfx.msbuild.2.1.0\build\docfx.msbuild.targets'))" />
   </Target>
-  <Import Project="..\..\packages\docfx.msbuild.2.0.1\build\docfx.msbuild.targets" Condition="Exists('..\..\packages\docfx.msbuild.2.0.1\build\docfx.msbuild.targets')" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it.
        Other similar extension points exist, see Microsoft.Common.targets.
   <Target Name="BeforeBuild">
