@@ -1,10 +1,12 @@
 ﻿//-----------------------------------------------------------------------
-// <copyright company="Nuclei">
-//     Copyright 2013 Nuclei. Licensed under the Apache License, Version 2.0.
+// <copyright company="TheNucleus">
+// Copyright (c) TheNucleus. All rights reserved.
+// Licensed under the Apache License, Version 2.0 license. See LICENCE.md file in the project root for full license information.
 // </copyright>
 //-----------------------------------------------------------------------
 
 using System;
+using System.Diagnostics.CodeAnalysis;
 using System.Reflection;
 using NUnit.Framework;
 
@@ -123,6 +125,11 @@ namespace Nuclei.Nunit.Extensions
         /// <summary>
         /// Tests whether <c>IEquatable{T}.Equals(T)</c> gives the correct return value.
         /// </summary>
+        [SuppressMessage(
+            "Microsoft.Naming",
+            "CA2204:Literals should be spelled correctly",
+            MessageId = "IEquatable",
+            Justification = "IEquatable is an interface name.")]
         public void EquatableEquals()
         {
             if (!typeof(IEquatable<T>).IsAssignableFrom(typeof(T)))
@@ -141,6 +148,11 @@ namespace Nuclei.Nunit.Extensions
         /// Tests whether <c>IEquatable{T}.Equals(T)</c> gives the correct return value
         /// if a non-equal object is passed in as the parameter.
         /// </summary>
+        [SuppressMessage(
+            "Microsoft.Naming",
+            "CA2204:Literals should be spelled correctly",
+            MessageId = "IEquatable",
+            Justification = "IEquatable is an interface name.")]
         public void EquatableEqualsWithNonEqualObject()
         {
             if (!typeof(IEquatable<T>).IsAssignableFrom(typeof(T)))
@@ -387,7 +399,7 @@ namespace Nuclei.Nunit.Extensions
         /// Tests whether <c>object.GetHashcode()</c> returns the same value
         /// for two equal objects.
         /// </summary>
-        public void HashcodeComparisonForEqualObjects()
+        public void HashCodeComparisonForEqualObjects()
         {
             object left = FirstInstance;
             object right = Copy(FirstInstance);

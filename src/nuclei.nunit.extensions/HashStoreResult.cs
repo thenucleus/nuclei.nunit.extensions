@@ -1,6 +1,7 @@
 ﻿//-----------------------------------------------------------------------
-// <copyright company="Nuclei">
-//     Copyright 2013 Nuclei. Licensed under the Apache License, Version 2.0.
+// <copyright company="TheNucleus">
+// Copyright (c) TheNucleus. All rights reserved.
+// Licensed under the Apache License, Version 2.0 license. See LICENCE.md file in the project root for full license information.
 // </copyright>
 //-----------------------------------------------------------------------
 
@@ -10,15 +11,16 @@ namespace Nuclei.Nunit.Extensions
     /// Stores the result of a hashcode collision calculation.
     /// </summary>
     /// <remarks>
-    /// This code is based on, but not exactly the same as, the code of the hashcode contract verifier in the MbUnit 
+    /// This code is based on, but not exactly the same as, the code of the hashcode contract verifier in the MbUnit
     /// project which is licensed under the Apache License 2.0. More information can be found at:
     /// https://code.google.com/p/mb-unit/.
     /// </remarks>
     internal sealed class HashStoreResult
     {
-        private readonly double m_CollisionProbability;
-        private readonly double m_UniformDistributionDeviationProbability;
-        
+        private readonly double _collisionProbability;
+
+        private readonly double _uniformDistributionDeviationProbability;
+
         /// <summary>
         /// Initializes a new instance of the <see cref="HashStoreResult"/> class.
         /// </summary>
@@ -26,8 +28,8 @@ namespace Nuclei.Nunit.Extensions
         /// <param name="uniformDistributionDeviationProbability">The probability a hashcode deviates from the uniform distribution.</param>
         public HashStoreResult(double collisionProbability, double uniformDistributionDeviationProbability)
         {
-            m_CollisionProbability = collisionProbability;
-            m_UniformDistributionDeviationProbability = uniformDistributionDeviationProbability;
+            _collisionProbability = collisionProbability;
+            _uniformDistributionDeviationProbability = uniformDistributionDeviationProbability;
         }
 
         /// <summary>
@@ -37,7 +39,7 @@ namespace Nuclei.Nunit.Extensions
         {
             get
             {
-                return m_CollisionProbability;
+                return _collisionProbability;
             }
         }
 
@@ -48,7 +50,7 @@ namespace Nuclei.Nunit.Extensions
         {
             get
             {
-                return m_UniformDistributionDeviationProbability;
+                return _uniformDistributionDeviationProbability;
             }
         }
     }

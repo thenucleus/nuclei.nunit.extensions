@@ -6,10 +6,46 @@
     <OutputType>Library</OutputType>
     <RootNamespace>Nuclei.Nunit.Extensions</RootNamespace>
     <AssemblyName>Nuclei.Nunit.Extensions</AssemblyName>
+    <!-- VS information -->
+    <ProductVersion>9.0.30729</ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <!-- Configuration -->
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <!-- Project directories -->
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <OutputPath>$(SolutionDir)\..\build\bin\$(Platform)\$(Configuration)\</OutputPath>
+    <IntermediateOutputPath>$(SolutionDir)\..\build\temp\bin\obj\$(AssemblyName)\$(Platform)\$(Configuration)\</IntermediateOutputPath>
+    <!-- Build configuration -->
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
     <RestorePackages>true</RestorePackages>
   </PropertyGroup>
-  <Import Project="$(SolutionDir)\BaseConfiguration.targets" />
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <DefineConstants>TRACE;DEBUG;CODE_ANALYSIS</DefineConstants>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <DefineConstants>TRACE;CODE_ANALYSIS</DefineConstants>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Deploy|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <DefineConstants>TRACE</DefineConstants>
+  </PropertyGroup>
+  <Import Project="$(SolutionDir)/base.props" />
   <ItemGroup>
+    <Reference Include="Nuclei.Build, Version=0.9.0.0, Culture=neutral, PublicKeyToken=ee5b68ec5ad4ef93, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\Nuclei.Build.0.9.0\lib\net40\Nuclei.Build.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="nunit.framework">
       <HintPath>..\..\packages\NUnit.2.6.2\lib\nunit.framework.dll</HintPath>
     </Reference>
@@ -23,32 +59,21 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="$(SOFTWARE_SIGNING_KEY_PATH)">
+    <None Include="$(SOFTWARE_SIGNING_KEY_PATH)\nuclei.snk">
       <Link>Properties\App.snk</Link>
     </None>
+    <None Include="nuclei.nunit.extensions.nuspec" />
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="..\..\templates\AssemblyInfo.Base.cs">
-      <Link>Properties\AssemblyInfo.Base.cs</Link>
-    </Compile>
-    <Compile Include="..\..\build\temp\AssemblyInfo.BuildInformation.cs">
-      <Link>Properties\AssemblyInfo.BuildInformation.cs</Link>
-    </Compile>
-    <Compile Include="..\..\build\temp\AssemblyInfo.InternalsVisibleTo.cs">
-      <Link>Properties\AssemblyInfo.InternalsVisibleTo.cs</Link>
-    </Compile>
-    <Compile Include="..\..\build\temp\AssemblyInfo.VersionNumber.cs">
-      <Link>Properties\AssemblyInfo.VersionNumber.cs</Link>
-    </Compile>
     <Compile Include="AssertExtensions.cs" />
     <Compile Include="ChiSquareTest.cs" />
     <Compile Include="EqualityContractVerifierTest.cs" />
     <Compile Include="ExceptionContractVerifier.cs" />
     <Compile Include="Gamma.cs" />
-    <Compile Include="HashcodeContractVerifierTest.cs" />
+    <Compile Include="HashCodeContractVerifierTest.cs" />
     <Compile Include="EqualityContractVerifier.cs" />
-    <Compile Include="HashcodeContractVerifier.cs" />
+    <Compile Include="HashCodeContractVerifier.cs" />
     <Compile Include="HashStore.cs" />
     <Compile Include="HashStoreResult.cs" />
     <Compile Include="IEqualityContractVerifier.cs" />
@@ -56,17 +81,12 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\nuclei.build\Nuclei.Build.csproj">
-      <Project>{aea39fa0-9b45-4fdf-b94c-543e410f480c}</Project>
-      <Name>Nuclei.Build</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\solutionlevel\SolutionLevel.csproj">
-      <Project>{b0b1c32a-53fc-4b7e-ba60-6dafb8180a42}</Project>
-      <Name>SolutionLevel</Name>
-    </ProjectReference>
+    <Analyzer Include="..\..\packages\StyleCop.Analyzers.1.0.0\analyzers\dotnet\cs\Newtonsoft.Json.dll" />
+    <Analyzer Include="..\..\packages\StyleCop.Analyzers.1.0.0\analyzers\dotnet\cs\StyleCop.Analyzers.CodeFixes.dll" />
+    <Analyzer Include="..\..\packages\StyleCop.Analyzers.1.0.0\analyzers\dotnet\cs\StyleCop.Analyzers.dll" />
   </ItemGroup>
-  <Import Project="$(SolutionDir)\.nuget\NuGet.targets" Condition="Exists('$(SolutionDir)\.nuget\NuGet.targets')" />
-  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it.
        Other similar extension points exist, see Microsoft.Common.targets.
   <Target Name="BeforeBuild">
   </Target>

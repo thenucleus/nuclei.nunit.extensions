@@ -1,0 +1,27 @@
+<?xml version="1.0"?>
+<package xmlns="http://schemas.microsoft.com/packaging/2010/07/nuspec.xsd">
+  <metadata>
+    <id>Nuclei.Nunit.Extensions</id>
+    <version>$VersionSemantic$</version>
+    <authors>Metamorpher</authors>
+    <owners>Metamorpher</owners>
+    <licenseUrl>http://www.apache.org/licenses/LICENSE-2.0</licenseUrl>
+    <projectUrl>https://github.com/Metamorpher/Nuclei.Nunit.Extensions</projectUrl>
+    <requireLicenseAcceptance>false</requireLicenseAcceptance>
+    <description>
+      Provides a set of base classes for testing hashcode and equality contract implementations with NUnit.
+    </description>
+    <releaseNotes>
+      $ReleaseNotes$
+    </releaseNotes>
+    <dependencies>
+      $Dependencies$
+    </dependencies>
+  </metadata>
+  <files>
+    <file src="$DirSrc$\Nuclei.Nunit.Extensions\bin\$Configuration$\Nuclei.Nunit.Extensions.dll" target="lib\net40" />
+    <file src="$DirSrc$\Nuclei.Nunit.Extensions\bin\$Configuration$\Nuclei.Nunit.Extensions.pdb" target="lib\net40" />
+    <file src="$DirSrc$\Nuclei.Nunit.Extensions\bin\$Configuration$\Nuclei.Nunit.Extensions.xml" target="lib\net40" />
+    <file src="$DirSrc$\Nuclei.Nunit.Extensions\**\*.cs" target="src\Nuclei.Nunit.Extensions" />
+  </files>
+</package>
