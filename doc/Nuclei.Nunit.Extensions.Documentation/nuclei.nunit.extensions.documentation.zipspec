@@ -1,6 +1,6 @@
 <?xml version="1.0"?>
 <archive>
-    <name>nuclei.build.documentation-${VersionSemantic}</name>
+    <name>nuclei.nunit.extensions.documentation-${VersionSemantic}</name>
     <files>
         <file src="${DirWorkspace}\readme.md" target="" />
         <file src="${DirWorkspace}\license.md" target="" />
