@@ -59,7 +59,7 @@ namespace Nuclei.Nunit.Extensions
                 null,
                 new[]
                     {
-                        typeof(string)
+                        typeof(string),
                     },
                 null);
             Assert.NotNull(constructor);
@@ -85,7 +85,7 @@ namespace Nuclei.Nunit.Extensions
                 new[]
                     {
                         typeof(string),
-                        typeof(Exception)
+                        typeof(Exception),
                     },
                 null);
             Assert.NotNull(constructor);
@@ -96,7 +96,7 @@ namespace Nuclei.Nunit.Extensions
                 new object[]
                 {
                     text,
-                    inner
+                    inner,
                 });
             Assert.AreEqual(text, instance.Message);
             Assert.AreSame(inner, instance.InnerException);
@@ -114,7 +114,7 @@ namespace Nuclei.Nunit.Extensions
                 new[]
                     {
                       typeof(SerializationInfo),
-                      typeof(StreamingContext)
+                      typeof(StreamingContext),
                     },
                 null);
             Assert.NotNull(constructor);
@@ -137,7 +137,7 @@ namespace Nuclei.Nunit.Extensions
                 new[]
                     {
                         typeof(string),
-                        typeof(Exception)
+                        typeof(Exception),
                     },
                 null);
             Assert.NotNull(constructor);
@@ -148,7 +148,7 @@ namespace Nuclei.Nunit.Extensions
                 new object[]
                 {
                     text,
-                    inner
+                    inner,
                 });
             var copy = AssertExtensions.RoundTripSerialize(instance);
 
