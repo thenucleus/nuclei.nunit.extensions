@@ -43,7 +43,7 @@ namespace Nuclei.Nunit.Extensions
             var constructor = typeof(TException).GetConstructor(
                 BindingFlags.Instance | BindingFlags.Public | BindingFlags.NonPublic,
                 null,
-                new Type[0],
+                Array.Empty<Type>(),
                 null);
             Assert.NotNull(constructor);
         }
