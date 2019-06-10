@@ -26,7 +26,7 @@ namespace Nuclei.Nunit.Extensions
             while ((method == null) && (localType != null))
             {
                 method = localType.GetMethod("op_Equality", BindingFlags.Static | BindingFlags.Public);
-                localType = localType.BaseType;
+                localType = localType.GetTypeInfo().BaseType;
             }
 
             return method;
@@ -39,7 +39,7 @@ namespace Nuclei.Nunit.Extensions
             while ((method == null) && (localType != null))
             {
                 method = localType.GetMethod("op_Inequality", BindingFlags.Static | BindingFlags.Public);
-                localType = localType.BaseType;
+                localType = localType.GetTypeInfo().BaseType;
             }
 
             return method;
