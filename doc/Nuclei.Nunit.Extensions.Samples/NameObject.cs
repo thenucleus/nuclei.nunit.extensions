@@ -22,6 +22,10 @@ namespace Nuclei.Nunit.Extensions.Samples
         /// <param name="first">The first object.</param>
         /// <param name="second">The second object.</param>
         /// <returns>The result of the operator.</returns>
+        [SuppressMessage(
+            "Microsoft.Design",
+            "CA1062:ValidateArgumentsOfPublicMethods",
+            Justification = "The nonNullObject cannot actually be null.")]
         public static bool operator ==(NameObject first, NameObject second)
         {
             // Check if first is a null reference by using ReferenceEquals because
@@ -49,6 +53,10 @@ namespace Nuclei.Nunit.Extensions.Samples
         /// <param name="first">The first object.</param>
         /// <param name="second">The second object.</param>
         /// <returns>The result of the operator.</returns>
+        [SuppressMessage(
+            "Microsoft.Design",
+            "CA1062:ValidateArgumentsOfPublicMethods",
+            Justification = "The nonNullObject cannot actually be null.")]
         public static bool operator !=(NameObject first, NameObject second)
         {
             // Check if first is a null reference by using ReferenceEquals because
@@ -86,7 +94,7 @@ namespace Nuclei.Nunit.Extensions.Samples
         {
             if (name == null)
             {
-                throw new ArgumentNullException("name");
+                throw new ArgumentNullException(nameof(name));
             }
 
             _name = name;
