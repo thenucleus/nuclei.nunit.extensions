@@ -25,8 +25,8 @@
   </PropertyGroup>
   <Import Project="$(MSBuildThisFileDirectory)/../../src/base.props" />
   <ItemGroup>
-    <Reference Include="Nuclei.Build, Version=1.0.0.0, Culture=neutral, PublicKeyToken=ee5b68ec5ad4ef93, processorArchitecture=MSIL">
-      <HintPath>..\..\packages\Nuclei.Build.1.0.0\lib\net40\Nuclei.Build.dll</HintPath>
+    <Reference Include="Nuclei.Build, Version=2.0.0.0, Culture=neutral, PublicKeyToken=ee5b68ec5ad4ef93, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\Nuclei.Build.2.0.0\lib\netstandard2.0\Nuclei.Build.dll</HintPath>
     </Reference>
     <Reference Include="nunit.framework, Version=3.12.0.0, Culture=neutral, PublicKeyToken=2638cd05610744eb, processorArchitecture=MSIL">
       <HintPath>..\..\packages\NUnit.3.12.0\lib\net40\nunit.framework.dll</HintPath>
