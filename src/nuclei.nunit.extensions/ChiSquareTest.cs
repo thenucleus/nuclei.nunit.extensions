@@ -31,12 +31,12 @@ namespace Nuclei.Nunit.Extensions
         {
             if (expected <= 0.0)
             {
-                throw new ArgumentOutOfRangeException("expected", "The expected value is negative.");
+                throw new ArgumentOutOfRangeException(nameof(expected), "The expected value is negative.");
             }
 
             if (actual == null)
             {
-                throw new ArgumentNullException("actual");
+                throw new ArgumentNullException(nameof(actual));
             }
 
             _degreesOfFreedom = actual.Count - numberOfConstraints;

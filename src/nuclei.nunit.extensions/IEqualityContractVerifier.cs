@@ -19,7 +19,7 @@ namespace Nuclei.Nunit.Extensions
     /// <para>
     /// This code is based on, but not exactly the same as, the code of the hashcode contract verifier in the MbUnit
     /// project which is licensed under the Apache License 2.0. More information can be found at:
-    /// https://code.google.com/p/mb-unit/
+    /// https://code.google.com/p/mb-unit/.
     /// </para>
     /// </remarks>
     public interface IEqualityContractVerifier

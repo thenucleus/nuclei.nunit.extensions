@@ -26,7 +26,7 @@ namespace Nuclei.Nunit.Extensions
             while ((method == null) && (localType != null))
             {
                 method = localType.GetMethod("op_Equality", BindingFlags.Static | BindingFlags.Public);
-                localType = localType.BaseType;
+                localType = localType.GetTypeInfo().BaseType;
             }
 
             return method;
@@ -39,7 +39,7 @@ namespace Nuclei.Nunit.Extensions
             while ((method == null) && (localType != null))
             {
                 method = localType.GetMethod("op_Inequality", BindingFlags.Static | BindingFlags.Public);
-                localType = localType.BaseType;
+                localType = localType.GetTypeInfo().BaseType;
             }
 
             return method;
@@ -190,7 +190,7 @@ namespace Nuclei.Nunit.Extensions
                 new object[]
                     {
                         left,
-                        right
+                        right,
                     });
 
             Assert.IsTrue((bool)result);
@@ -219,7 +219,7 @@ namespace Nuclei.Nunit.Extensions
                 new object[]
                     {
                         left,
-                        right
+                        right,
                     });
 
             Assert.IsFalse((bool)result);
@@ -247,7 +247,7 @@ namespace Nuclei.Nunit.Extensions
                 new object[]
                     {
                         null,
-                        instance
+                        instance,
                     });
 
             Assert.IsFalse((bool)result);
@@ -275,7 +275,7 @@ namespace Nuclei.Nunit.Extensions
                 new object[]
                     {
                         instance,
-                        null
+                        null,
                     });
 
             Assert.IsFalse((bool)result);
@@ -304,7 +304,7 @@ namespace Nuclei.Nunit.Extensions
                 new object[]
                     {
                         left,
-                        right
+                        right,
                     });
 
             Assert.IsFalse((bool)result);
@@ -333,7 +333,7 @@ namespace Nuclei.Nunit.Extensions
                 new object[]
                     {
                         left,
-                        right
+                        right,
                     });
 
             Assert.IsTrue((bool)result);
@@ -361,7 +361,7 @@ namespace Nuclei.Nunit.Extensions
                 new object[]
                     {
                         left,
-                        null
+                        null,
                     });
 
             Assert.IsTrue((bool)result);
@@ -389,7 +389,7 @@ namespace Nuclei.Nunit.Extensions
                 new object[]
                     {
                         null,
-                        right
+                        right,
                     });
 
             Assert.IsTrue((bool)result);

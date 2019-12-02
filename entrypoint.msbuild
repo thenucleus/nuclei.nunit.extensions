@@ -1,5 +1,7 @@
-<?xml version="1.0" encoding="utf-8"?>
-<Project DefaultTargets="Help" ToolsVersion="14.0"
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project
+    DefaultTargets="Help"
+    ToolsVersion="14.0"
     xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
     <PropertyGroup>
         <!-- Directories -->
@@ -79,10 +81,18 @@
                       NBUILDKIT_MACHINE_ENVIRONMENT_FILE, if it exists
         * Workspace - Load the environment information from the file in the workspace, if it exists
     -->
-    <Import Condition="Exists('$(FileEnvironment)') AND (('$(UseEnvironmentFrom)' == 'File')  OR (('$(UseEnvironmentFrom)' == '') AND ('$(ExistsEnvironmentSettings)' != 'true'))) " Project="$(FileEnvironment)" />
-    <Import Condition="Exists('$(NBUILDKIT_USER_ENVIRONMENT_FILE)') AND (('$(UseEnvironmentFrom)' == 'User')  OR (('$(UseEnvironmentFrom)' == '') AND ('$(ExistsEnvironmentSettings)' != 'true'))) " Project="$(NBUILDKIT_USER_ENVIRONMENT_FILE)" />
-    <Import Condition="Exists('$(NBUILDKIT_MACHINE_ENVIRONMENT_FILE)') AND (('$(UseEnvironmentFrom)' == 'Machine')  OR (('$(UseEnvironmentFrom)' == '') AND ('$(ExistsEnvironmentSettings)' != 'true'))) " Project="$(NBUILDKIT_MACHINE_ENVIRONMENT_FILE)" />
-    <Import Condition="Exists('$(DirUserSettings)\environment.props') AND (('$(UseEnvironmentFrom)' == 'Workspace')  OR (('$(UseEnvironmentFrom)' == '') AND ('$(ExistsEnvironmentSettings)' != 'true'))) " Project="$(DirUserSettings)\environment.props" />
+    <Import
+        Condition="Exists('$(FileEnvironment)') AND (('$(UseEnvironmentFrom)' == 'File')  OR (('$(UseEnvironmentFrom)' == '') AND ('$(ExistsEnvironmentSettings)' != 'true'))) "
+        Project="$(FileEnvironment)" />
+    <Import
+        Condition="Exists('$(NBUILDKIT_USER_ENVIRONMENT_FILE)') AND (('$(UseEnvironmentFrom)' == 'User')  OR (('$(UseEnvironmentFrom)' == '') AND ('$(ExistsEnvironmentSettings)' != 'true'))) "
+        Project="$(NBUILDKIT_USER_ENVIRONMENT_FILE)" />
+    <Import
+        Condition="Exists('$(NBUILDKIT_MACHINE_ENVIRONMENT_FILE)') AND (('$(UseEnvironmentFrom)' == 'Machine')  OR (('$(UseEnvironmentFrom)' == '') AND ('$(ExistsEnvironmentSettings)' != 'true'))) "
+        Project="$(NBUILDKIT_MACHINE_ENVIRONMENT_FILE)" />
+    <Import
+        Condition="Exists('$(DirUserSettings)\environment.props') AND (('$(UseEnvironmentFrom)' == 'Workspace')  OR (('$(UseEnvironmentFrom)' == '') AND ('$(ExistsEnvironmentSettings)' != 'true'))) "
+        Project="$(DirUserSettings)\environment.props" />
 
     <!--
         Display the help text for the current script and then exit.
@@ -174,7 +184,9 @@
         script and passing the path to the 'settings.props' file and the version of nBuildKit that is going to
         be used to execute the build.
     -->
-    <Target DependsOnTargets="_EntryPoint_SetTargets_Build;_EntryPoint_Execute" Name="Build">
+    <Target
+        DependsOnTargets="_EntryPoint_SetTargets_Build;_EntryPoint_Execute"
+        Name="Build">
     </Target>
 
     <Target Name="_EntryPoint_SetTargets_Build">
@@ -188,7 +200,9 @@
         script and passing the path to the 'settings.props' file and the version of nBuildKit that is going to
         be used to execute the tests.
     -->
-    <Target DependsOnTargets="_EntryPoint_SetTargets_Test;_EntryPoint_Execute" Name="Test">
+    <Target
+        DependsOnTargets="_EntryPoint_SetTargets_Test;_EntryPoint_Execute"
+        Name="Test">
     </Target>
 
     <Target Name="_EntryPoint_SetTargets_Test">
@@ -202,7 +216,9 @@
         script and passing the path to the 'settings.props' file and the version of nBuildKit that is going to
         be used to execute the deploy.
     -->
-    <Target DependsOnTargets="_EntryPoint_SetTargets_Deploy;_EntryPoint_Execute" Name="Deploy">
+    <Target
+        DependsOnTargets="_EntryPoint_SetTargets_Deploy;_EntryPoint_Execute"
+        Name="Deploy">
     </Target>
 
     <Target Name="_EntryPoint_SetTargets_Deploy">
@@ -211,68 +227,139 @@
         </PropertyGroup>
     </Target>
 
-    <Target DependsOnTargets="_EntryPoint_LocateEntryPoint" Name="_EntryPoint_Execute">
-        <Error Code="NBKEP0100" Condition=" '$(DirEntryPointPackage)' == '' OR !Exists('$(DirEntryPointPackage)')" HelpKeyword="NBuildKitEntryPoint.PackageNotFound" Text="Could not determine the location of the $(PackageNameEntryPoint) NuGet package. The file was expected to be in '$(DirPackages)\$(PackageNameEntryPoint).&lt;VERSION&gt;' directory, but that directory does not exist. Cannot start build." />
+    <Target
+        DependsOnTargets="_EntryPoint_LocateEntryPoint"
+        Name="_EntryPoint_Execute">
+        <Error
+            Code="NBKEP0100"
+            Condition=" '$(DirEntryPointPackage)' == '' OR !Exists('$(DirEntryPointPackage)')"
+            HelpKeyword="NBuildKitEntryPoint.PackageNotFound"
+            Text="Could not determine the location of the $(PackageNameEntryPoint) NuGet package. The file was expected to be in '$(DirPackages)\$(PackageNameEntryPoint).&lt;VERSION&gt;' directory, but that directory does not exist. Cannot start build." />
 
-        <MSBuild BuildInParallel="False" Projects="$(DirEntryPointPackage)\run.msbuild" Properties="DirWorkspace=$(DirWorkspace);DirUserSettings=$(DirUserSettings);DirPackages=$(DirPackages)" RebaseOutputs="False" RemoveProperties="" RunEachTargetSeparately="True" SkipNonexistentProjects="False" StopOnFirstFailure="True" TargetAndPropertyListSeparators="" Targets="$(TargetToExecute)" ToolsVersion="$(MSBuildToolsVersion)" UnloadProjectsOnCompletion="True" UseResultsCache="True">
+        <MSBuild
+            BuildInParallel="False"
+            Projects="$(DirEntryPointPackage)\run.msbuild"
+            Properties="DirWorkspace=$(DirWorkspace);DirUserSettings=$(DirUserSettings);DirPackages=$(DirPackages)"
+            RebaseOutputs="False"
+            RemoveProperties=""
+            RunEachTargetSeparately="True"
+            SkipNonexistentProjects="False"
+            StopOnFirstFailure="True"
+            TargetAndPropertyListSeparators=""
+            Targets="$(TargetToExecute)"
+            ToolsVersion="$(MSBuildToolsVersion)"
+            UnloadProjectsOnCompletion="True"
+            UseResultsCache="True">
         </MSBuild>
     </Target>
 
     <!--
         Get the full path to the entrypoint package directory so that we can invoked the build scripts from there.
     -->
-    <Target DependsOnTargets="_EntryPoint_LocatePackagesDir;_EntryPoint_RestoreGlobalNugetPackages;_EntryPoint_LocateEntryPointViaPackagesConfig;_EntryPoint_LocatePackageViaHighestAvailableVersion" Name="_EntryPoint_LocateEntryPoint">
+    <Target
+        DependsOnTargets="_EntryPoint_LocatePackagesDir;_EntryPoint_RestoreGlobalNugetPackages;_EntryPoint_LocateEntryPointViaPackagesConfig;_EntryPoint_LocatePackageViaHighestAvailableVersion"
+        Name="_EntryPoint_LocateEntryPoint">
         <Message Text="DirEntryPointPackage after search: $(DirEntryPointPackage)" />
 
-        <Error Code="NBKEP0101" Condition="!Exists('$(DirEntryPointPackage)')" HelpKeyword="NBuildKitEntryPoint.NBuildKitNotFound" Text="Unable to find the nBuildKit directory." />
+        <Error
+            Code="NBKEP0101"
+            Condition="!Exists('$(DirEntryPointPackage)')"
+            HelpKeyword="NBuildKitEntryPoint.NBuildKitNotFound"
+            Text="Unable to find the nBuildKit directory." />
     </Target>
 
     <!--
         Restore all the packages that are used by the non-compilation part of the build and deploy process. This is required
         so that we can be sure that the nBuildKit main package is extacted to the package directory.
     -->
-    <Target DependsOnTargets="_EntryPoint_LocatePackagesDir" Name="_EntryPoint_RestoreGlobalNugetPackages">
-        <EntryPoint_LocalTask_NuGetRestore Condition="Exists('$(NuGetPackageFile)')" NuGetPath="$(ToolsExternalNuGetPath)" PackageDirectory="$(DirPackages)" PackageFile="$(NuGetPackageFile)" Sources="@(NuGetSources)" />
+    <Target
+        DependsOnTargets="_EntryPoint_LocatePackagesDir"
+        Name="_EntryPoint_RestoreGlobalNugetPackages">
+        <EntryPoint_LocalTask_NuGetRestore
+            Condition="Exists('$(NuGetPackageFile)')"
+            NuGetPath="$(ToolsExternalNuGetPath)"
+            PackageDirectory="$(DirPackages)"
+            PackageFile="$(NuGetPackageFile)"
+            Sources="@(NuGetSources)" />
     </Target>
 
-    <Target Condition="Exists('$(DirPackages)')" Name="_EntryPoint_LocateEntryPointViaPackagesConfig">
+    <Target
+        Condition="Exists('$(DirPackages)')"
+        Name="_EntryPoint_LocateEntryPointViaPackagesConfig">
         <!-- Get the version of nBuildKit that is expected from the global packages file -->
-        <XmlPeek Condition="Exists('$(NuGetPackageFile)')" Query="//package[@id='$(PackageNameEntryPoint)']/@version" XmlInputPath="$(NuGetPackageFile)">
-            <Output ItemName="VersionEntrypointPackage" TaskParameter="Result" />
+        <XmlPeek
+            Condition="Exists('$(NuGetPackageFile)')"
+            Query="//package[@id='$(PackageNameEntryPoint)']/@version"
+            XmlInputPath="$(NuGetPackageFile)">
+            <Output
+                ItemName="VersionEntrypointPackage"
+                TaskParameter="Result" />
         </XmlPeek>
         <Message Text="Version: @(VersionEntrypointPackage)" />
 
-        <CreateProperty Condition=" '@(VersionEntrypointPackage)' != '' " Value="%(VersionEntrypointPackage.Identity)">
-            <Output PropertyName="PackageVersion" TaskParameter="Value" />
+        <CreateProperty
+            Condition=" '@(VersionEntrypointPackage)' != '' "
+            Value="%(VersionEntrypointPackage.Identity)">
+            <Output
+                PropertyName="PackageVersion"
+                TaskParameter="Value" />
         </CreateProperty>
 
         <!--
             If the packages directory exists then we assume that nBuildKit is in there. If that is not the case we'll get a
             non-existing path but that will lead to an error.
         -->
-        <CreateProperty Condition="Exists('$(DirPackages)') AND Exists('$(DirPackages)\$(PackageNameEntryPoint).$(PackageVersion)\build')" Value="$(DirPackages)\$(PackageNameEntryPoint).$(PackageVersion)\build">
-            <Output PropertyName="DirEntryPointPackage" TaskParameter="Value" />
+        <CreateProperty
+            Condition="Exists('$(DirPackages)') AND Exists('$(DirPackages)\$(PackageNameEntryPoint).$(PackageVersion)\build')"
+            Value="$(DirPackages)\$(PackageNameEntryPoint).$(PackageVersion)\build">
+            <Output
+                PropertyName="DirEntryPointPackage"
+                TaskParameter="Value" />
         </CreateProperty>
-        <CreateProperty Condition="Exists('$(DirPackages)') AND Exists('$(DirPackages)\$(PackageNameEntryPoint)\build')" Value="$(DirPackages)\$(PackageNameEntryPoint)\build">
-            <Output PropertyName="DirEntryPointPackage" TaskParameter="Value" />
+        <CreateProperty
+            Condition="Exists('$(DirPackages)') AND Exists('$(DirPackages)\$(PackageNameEntryPoint)\build')"
+            Value="$(DirPackages)\$(PackageNameEntryPoint)\build">
+            <Output
+                PropertyName="DirEntryPointPackage"
+                TaskParameter="Value" />
         </CreateProperty>
 
         <Message Text="DirEntryPointPackage after searching packages.config: $(DirEntryPointPackage)" />
     </Target>
 
-    <Target Condition="!Exists('$(DirEntryPointPackage)')" Name="_EntryPoint_LocatePackageViaHighestAvailableVersion">
+    <Target
+        Condition="!Exists('$(DirEntryPointPackage)')"
+        Name="_EntryPoint_LocatePackageViaHighestAvailableVersion">
         <ItemGroup>
-            <NuGetSourcesToSearch Condition=" '$(AllowTestVersions)' != 'true' " Include="$(UriNuGetProductionRead)" />
-            <NuGetSourcesToSearch Condition=" '$(AllowTestVersions)' == 'true' AND '@(NuGetSources)' != '' " Include="@(NuGetSources)" />
+            <NuGetSourcesToSearch
+                Condition=" '$(AllowTestVersions)' != 'true' "
+                Include="$(UriNuGetProductionRead)" />
+            <NuGetSourcesToSearch
+                Condition=" '$(AllowTestVersions)' == 'true' AND '@(NuGetSources)' != '' "
+                Include="@(NuGetSources)" />
         </ItemGroup>
 
-        <EntryPoint_LocalTask_GetHighestSuitablePackageVersionFromNuGet NuGetPath="$(ToolsExternalNuGetPath)" PackageName="$(PackageNameEntryPoint)" Sources="@(NuGetSourcesToSearch)">
-            <Output PropertyName="PackageVersion" TaskParameter="Version" />
+        <EntryPoint_LocalTask_GetHighestSuitablePackageVersionFromNuGet
+            NuGetPath="$(ToolsExternalNuGetPath)"
+            PackageName="$(PackageNameEntryPoint)"
+            Sources="@(NuGetSourcesToSearch)" >
+            <Output
+                PropertyName="PackageVersion"
+                TaskParameter="Version" />
         </EntryPoint_LocalTask_GetHighestSuitablePackageVersionFromNuGet>
-        <EntryPoint_LocalTask_InstallPackageFromNuGet NuGetPath="$(ToolsExternalNuGetPath)" PackageDirectory="$(DirPackages)" PackageName="$(PackageNameEntryPoint)" PackageVersion="$(PackageVersion)" Sources="@(NuGetSourcesToSearch)" />
+        <EntryPoint_LocalTask_InstallPackageFromNuGet
+            NuGetPath="$(ToolsExternalNuGetPath)"
+            PackageDirectory="$(DirPackages)"
+            PackageName="$(PackageNameEntryPoint)"
+            PackageVersion="$(PackageVersion)"
+            Sources="@(NuGetSourcesToSearch)" />
 
-        <CreateProperty Condition="Exists('$(DirPackages)')" Value="$(DirPackages)\$(PackageNameEntryPoint)\build">
-            <Output PropertyName="DirEntryPointPackage" TaskParameter="Value" />
+        <CreateProperty
+            Condition="Exists('$(DirPackages)')"
+            Value="$(DirPackages)\$(PackageNameEntryPoint)\build">
+            <Output
+                PropertyName="DirEntryPointPackage"
+                TaskParameter="Value" />
         </CreateProperty>
 
         <Message Text="DirEntryPointPackage after getting highest allowed version: $(DirEntryPointPackage)" />
@@ -283,29 +370,50 @@
     -->
     <Target Name="_EntryPoint_LocatePackagesDir">
         <!-- Determine if a packages folder exists at the same level as this script. If so use that  -->
-        <CreateProperty Condition="Exists('$(DirDefaultPackages)')" Value="$(DirDefaultPackages)">
-            <Output PropertyName="DirPackages" TaskParameter="Value" />
+        <CreateProperty
+            Condition="Exists('$(DirDefaultPackages)')"
+            Value="$(DirDefaultPackages)">
+            <Output
+                PropertyName="DirPackages"
+                TaskParameter="Value" />
         </CreateProperty>
 
         <!-- Get the location of the packages directory from the local nuget.config file -->
-        <XmlPeek Condition="!Exists('$(DirPackages)') AND Exists('$(FileNugetConfig)')" Query="//add[@key='repositorypath']/@value" XmlInputPath="$(FileNugetConfig)">
-            <Output ItemName="DirNuGetPackages" TaskParameter="Result" />
+        <XmlPeek
+            Condition="!Exists('$(DirPackages)') AND Exists('$(FileNugetConfig)')"
+            Query="//add[@key='repositorypath']/@value"
+            XmlInputPath="$(FileNugetConfig)">
+            <Output
+                ItemName="DirNuGetPackages"
+                TaskParameter="Result" />
         </XmlPeek>
 
         <!-- If the DirNuGetPackages has a root (i.e. a drive letter) then we assume it is an absolute path. Just use it that way. -->
-        <CreateProperty Condition=" '$(DirNuGetPackages)' != '' AND $([System.IO.Path]::IsPathRooted('%(DirNuGetPackages.Identity)'))" Value="$([System.IO.Path]::GetFullPath('%(DirNuGetPackages.Identity)'))">
-            <Output PropertyName="DirPackages" TaskParameter="Value" />
+        <CreateProperty
+            Condition=" '$(DirNuGetPackages)' != '' AND $([System.IO.Path]::IsPathRooted('%(DirNuGetPackages.Identity)'))"
+            Value="$([System.IO.Path]::GetFullPath('%(DirNuGetPackages.Identity)'))">
+            <Output
+                PropertyName="DirPackages"
+                TaskParameter="Value" />
         </CreateProperty>
 
         <!-- If the DirNuGetPackages has no root (i.e. no drive letter) then we assume it is a relative path. Base it on the directory that the nuget.config file is in. -->
-        <CreateProperty Condition=" '@(DirNuGetPackages)' != '' AND !$([System.IO.Path]::IsPathRooted('%(DirNuGetPackages.Identity)'))" Value="$([System.IO.Path]::GetFullPath('$(DirWorkspace)\%(DirNuGetPackages.Identity)'))">
-            <Output PropertyName="DirPackages" TaskParameter="Value" />
+        <CreateProperty
+            Condition=" '@(DirNuGetPackages)' != '' AND !$([System.IO.Path]::IsPathRooted('%(DirNuGetPackages.Identity)'))"
+            Value="$([System.IO.Path]::GetFullPath('$(DirWorkspace)\%(DirNuGetPackages.Identity)'))">
+            <Output
+                PropertyName="DirPackages"
+                TaskParameter="Value" />
         </CreateProperty>
 
-        <Message Condition=" '$(DirPackages)' != '' " Text="Package directory at: $(DirPackages)" />
+        <Message
+            Condition=" '$(DirPackages)' != '' "
+            Text="Package directory at: $(DirPackages)" />
 
         <!-- No packages folder found. Note this and move on -->
-        <Warning Condition=" '$(DirPackages)' == '' " Text="Unable to find the packages folder." />
+        <Warning
+            Condition=" '$(DirPackages)' == '' "
+            Text="Unable to find the packages folder." />
     </Target>
 
     <!--
@@ -315,17 +423,32 @@
         In order to prevent it from ever colliding with any of the inline tasks defined elsewhere we'll give it
         a name that is unlikely ever to be used elsewhere (yay poor-mans namespaces?).
     -->
-    <UsingTask AssemblyFile="$(MsBuildTasksAssembly)" TaskFactory="CodeTaskFactory" TaskName="EntryPoint_LocalTask_NuGetRestore">
+    <UsingTask
+        AssemblyFile="$(MsBuildTasksAssembly)"
+        TaskFactory="CodeTaskFactory"
+        TaskName="EntryPoint_LocalTask_NuGetRestore">
         <ParameterGroup>
-            <NuGetPath ParameterType="System.String" Required="true" />
-            <PackageFile ParameterType="System.String" Required="true" />
-            <PackageDirectory ParameterType="System.String" Required="true" />
-            <Sources ParameterType="Microsoft.Build.Framework.ITaskItem[]" Required="false" />
+            <NuGetPath
+                ParameterType="System.String"
+                Required="true" />
+            <PackageFile
+                ParameterType="System.String"
+                Required="true" />
+            <PackageDirectory
+                ParameterType="System.String"
+                Required="true" />
+            <Sources
+                ParameterType="Microsoft.Build.Framework.ITaskItem[]"
+                Required="false" />
         </ParameterGroup>
         <Task>
-            <Reference Include="System.Xml" />
-            <Reference Include="System.Xml.Linq" />
-            <Code Language="cs" Type="Method">
+            <Reference
+                Include="System.Xml" />
+            <Reference
+                Include="System.Xml.Linq" />
+            <Code
+                Language="cs"
+                Type="Method">
                 <![CDATA[
                     public override bool Execute()
                     {
@@ -413,15 +536,28 @@
         In order to prevent this task from ever colliding with any of the inline tasks defined elsewhere we'll give it
         a name that is unlikely ever to be used elsewhere (yay poor-mans namespaces?).
     -->
-    <UsingTask AssemblyFile="$(MsBuildTasksAssembly)" TaskFactory="CodeTaskFactory" TaskName="EntryPoint_LocalTask_GetHighestSuitablePackageVersionFromNuGet">
+    <UsingTask
+        AssemblyFile="$(MsBuildTasksAssembly)"
+        TaskFactory="CodeTaskFactory"
+        TaskName="EntryPoint_LocalTask_GetHighestSuitablePackageVersionFromNuGet">
         <ParameterGroup>
-            <NuGetPath ParameterType="System.String" Required="true" />
-            <PackageName ParameterType="System.String" Required="true" />
-            <Sources ParameterType="Microsoft.Build.Framework.ITaskItem[]" Required="false" />
-            <Version Output="true" ParameterType="System.String" />
+            <NuGetPath
+                ParameterType="System.String"
+                Required="true" />
+            <PackageName
+                ParameterType="System.String"
+                Required="true" />
+            <Sources
+                ParameterType="Microsoft.Build.Framework.ITaskItem[]"
+                Required="false" />
+            <Version
+                Output="true"
+                ParameterType="System.String" />
         </ParameterGroup>
         <Task>
-            <Code Language="cs" Type="Method">
+            <Code
+                Language="cs"
+                Type="Method">
                 <![CDATA[
                     public override bool Execute()
                     {
@@ -594,16 +730,31 @@
         In order to prevent this task from ever colliding with any of the inline tasks defined elsewhere we'll give it
         a name that is unlikely ever to be used elsewhere (yay poor-mans namespaces?).
     -->
-    <UsingTask AssemblyFile="$(MsBuildTasksAssembly)" TaskFactory="CodeTaskFactory" TaskName="EntryPoint_LocalTask_InstallPackageFromNuGet">
+    <UsingTask
+        AssemblyFile="$(MsBuildTasksAssembly)"
+        TaskFactory="CodeTaskFactory"
+        TaskName="EntryPoint_LocalTask_InstallPackageFromNuGet">
         <ParameterGroup>
-            <NuGetPath ParameterType="System.String" Required="true" />
-            <PackageDirectory ParameterType="System.String" Required="true" />
-            <PackageName ParameterType="System.String" Required="true" />
-            <PackageVersion ParameterType="System.String" Required="true" />
-            <Sources ParameterType="Microsoft.Build.Framework.ITaskItem[]" Required="false" />
+            <NuGetPath
+                ParameterType="System.String"
+                Required="true" />
+            <PackageDirectory
+                ParameterType="System.String"
+                Required="true" />
+            <PackageName
+                ParameterType="System.String"
+                Required="true" />
+            <PackageVersion
+                ParameterType="System.String"
+                Required="true" />
+            <Sources
+                ParameterType="Microsoft.Build.Framework.ITaskItem[]"
+                Required="false" />
         </ParameterGroup>
         <Task>
-            <Code Language="cs" Type="Method">
+            <Code
+                Language="cs"
+                Type="Method">
                 <![CDATA[
                     public override bool Execute()
                     {
@@ -698,6 +849,6 @@
 
     <PropertyGroup>
         <!-- Defines the version number of the configuration file -->
-        <NBuildKitConfigurationVersion>1.0</NBuildKitConfigurationVersion>
+        <NBuildKitConfigurationVersion>1.1</NBuildKitConfigurationVersion>
     </PropertyGroup>
 </Project>
