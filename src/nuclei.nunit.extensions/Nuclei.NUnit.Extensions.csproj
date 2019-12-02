@@ -1,96 +1,47 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
-<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+﻿<Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
-    <SolutionDir Condition="'$(SolutionDir)' == '' or '$(SolutionDir)' == '*undefined*'">$(MSBuildProjectDirectory)\..</SolutionDir>
-    <ProjectGuid>{95F183AF-7BBA-4ECE-AC1C-EE006317470D}</ProjectGuid>
-    <OutputType>Library</OutputType>
-    <RootNamespace>Nuclei.Nunit.Extensions</RootNamespace>
-    <AssemblyName>Nuclei.Nunit.Extensions</AssemblyName>
-    <!-- VS information -->
-    <ProductVersion>9.0.30729</ProductVersion>
-    <SchemaVersion>2.0</SchemaVersion>
-    <!-- Configuration -->
-    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
-    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
-    <FileAlignment>512</FileAlignment>
-    <!-- Project directories -->
-    <AppDesignerFolder>Properties</AppDesignerFolder>
-    <OutputPath>$(SolutionDir)\..\build\bin\$(Platform)\$(Configuration)\</OutputPath>
-    <IntermediateOutputPath>$(SolutionDir)\..\build\temp\bin\obj\$(AssemblyName)\$(Platform)\$(Configuration)\</IntermediateOutputPath>
-    <!-- Build configuration -->
-    <ErrorReport>prompt</ErrorReport>
-    <WarningLevel>4</WarningLevel>
-    <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
+    <TargetFrameworks>netstandard1.4;netstandard2.0</TargetFrameworks>
+  </PropertyGroup>
+  <PropertyGroup>
+    <AssemblyVersion>1.0.0.0</AssemblyVersion>
+    <FileVersion>1.0.0.0</FileVersion>
+    <InformationalVersion>1.0.0</InformationalVersion>
     <RestorePackages>true</RestorePackages>
   </PropertyGroup>
-  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
-    <DebugSymbols>true</DebugSymbols>
-    <DebugType>full</DebugType>
-    <Optimize>false</Optimize>
-    <DefineConstants>TRACE;DEBUG;CODE_ANALYSIS</DefineConstants>
+  <PropertyGroup>
+    <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
+    <Version>1.0.0</Version>
+    <IncludeSymbols>true</IncludeSymbols>
+    <IncludeSource>true</IncludeSource>
+    <SymbolPackageFormat>symbols.nupkg</SymbolPackageFormat>
+    <PackageOutputPath>$(MSBuildThisFileDirectory)/../../build/deploy</PackageOutputPath>
   </PropertyGroup>
-  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
-    <DebugType>pdbonly</DebugType>
-    <Optimize>true</Optimize>
-    <DefineConstants>TRACE;CODE_ANALYSIS</DefineConstants>
-  </PropertyGroup>
-  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Deploy|AnyCPU' ">
-    <DebugType>pdbonly</DebugType>
-    <Optimize>true</Optimize>
-    <DefineConstants>TRACE</DefineConstants>
+  <PropertyGroup>
+    <Authors>P. van der Velde</Authors>
+    <Company>Company</Company>
+    <PackageId>Nuclei.NUnit.Extensions</PackageId>
+    <Description>Provides a set of base classes for testing hashcode and equality contract implementations with NUnit.</Description>
+    <Copyright>Copyright</Copyright>
+    <PackageLicenseExpression>Apache-2.0</PackageLicenseExpression>
+    <PackageProjectUrl>https://github.com/thenucleus/nuclei.nunit.extensions</PackageProjectUrl>
+    <RepositoryUrl>https://github.com/thenucleus/nuclei.nunit.extensions</RepositoryUrl>
   </PropertyGroup>
   <Import Project="$(SolutionDir)/base.props" />
-  <ItemGroup>
-    <Reference Include="Nuclei.Build, Version=1.0.0.0, Culture=neutral, PublicKeyToken=ee5b68ec5ad4ef93, processorArchitecture=MSIL">
-      <HintPath>..\..\packages\Nuclei.Build.1.0.0\lib\net40\Nuclei.Build.dll</HintPath>
-      <Private>True</Private>
-    </Reference>
-    <Reference Include="nunit.framework, Version=2.7.0.0, Culture=neutral, PublicKeyToken=2638cd05610744eb, processorArchitecture=MSIL">
-      <HintPath>..\..\packages\NUnit.2.7.0\lib\nunit.framework.dll</HintPath>
-    </Reference>
-    <Reference Include="System" />
-    <Reference Include="System.configuration" />
-    <Reference Include="System.Core" />
-    <Reference Include="System.Xml.Linq" />
-    <Reference Include="System.Data.DataSetExtensions" />
-    <Reference Include="Microsoft.CSharp" />
-    <Reference Include="System.Data" />
-    <Reference Include="System.Xml" />
-  </ItemGroup>
   <ItemGroup>
     <None Include="$(SOFTWARE_SIGNING_KEY_PATH)\nuclei.snk">
       <Link>Properties\App.snk</Link>
     </None>
-    <None Include="nuclei.nunit.extensions.nuspec" />
-    <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="AssertExtensions.cs" />
-    <Compile Include="ChiSquareTest.cs" />
-    <Compile Include="EqualityContractVerifierTest.cs" />
-    <Compile Include="ExceptionContractVerifier.cs" />
-    <Compile Include="Gamma.cs" />
-    <Compile Include="HashCodeContractVerifierTest.cs" />
-    <Compile Include="EqualityContractVerifier.cs" />
-    <Compile Include="HashCodeContractVerifier.cs" />
-    <Compile Include="HashStore.cs" />
-    <Compile Include="HashStoreResult.cs" />
-    <Compile Include="IEqualityContractVerifier.cs" />
-    <Compile Include="NotEnoughHashesException.cs" />
-    <Compile Include="Properties\AssemblyInfo.cs" />
+    <PackageReference Include="Microsoft.CodeAnalysis.FxCopAnalyzers" Version="2.9.3" />
+    <PackageReference Include="Nuclei.Build" Version="2.0.0" />
+    <PackageReference Include="NUnit" Version="3.12.0" />
+    <PackageReference Include="StyleCop.Analyzers" Version="1.1.118">
+      <PrivateAssets>all</PrivateAssets>
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+    </PackageReference>
   </ItemGroup>
-  <ItemGroup>
-    <Analyzer Include="..\..\packages\StyleCop.Analyzers.1.0.0\analyzers\dotnet\cs\Newtonsoft.Json.dll" />
-    <Analyzer Include="..\..\packages\StyleCop.Analyzers.1.0.0\analyzers\dotnet\cs\StyleCop.Analyzers.CodeFixes.dll" />
-    <Analyzer Include="..\..\packages\StyleCop.Analyzers.1.0.0\analyzers\dotnet\cs\StyleCop.Analyzers.dll" />
+  <ItemGroup Condition=" '$(TargetFramework)' == 'netstandard1.4' ">
+    <PackageReference Include="System.Reflection.TypeExtensions" Version="4.5.1" />
   </ItemGroup>
-  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
-  <!-- To modify your build process, add your task inside one of the targets below and uncomment it.
-       Other similar extension points exist, see Microsoft.Common.targets.
-  <Target Name="BeforeBuild">
-  </Target>
-  <Target Name="AfterBuild">
-  </Target>
-  -->
 </Project>

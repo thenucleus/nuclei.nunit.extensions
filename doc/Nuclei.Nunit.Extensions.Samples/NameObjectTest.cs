@@ -118,17 +118,5 @@ namespace Nuclei.Nunit.Extensions.Samples
                 return _equalityVerifier;
             }
         }
-
-        /// <summary>
-        /// Verifies that the object can be serialized and deserialized without losing information.
-        /// </summary>
-        [Test]
-        public void RoundTripSerialize()
-        {
-            var original = new NameObject("my_cool_name");
-            var copy = AssertExtensions.RoundTripSerialize(original);
-
-            Assert.AreEqual(original, copy);
-        }
     }
 }

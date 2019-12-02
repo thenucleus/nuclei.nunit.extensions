@@ -28,7 +28,7 @@ namespace Nuclei.Nunit.Extensions
                     24.014098240830911,
                     -1.231739572450155,
                     0.001208650973866179,
-                    -5.395239384953E-06
+                    -5.395239384953E-06,
                 };
             var num2 = a;
             double d = a + 5.5;
@@ -46,12 +46,12 @@ namespace Nuclei.Nunit.Extensions
         {
             if (x < 0.0)
             {
-                throw new ArgumentOutOfRangeException("x");
+                throw new ArgumentOutOfRangeException(nameof(x));
             }
 
             if (a <= 0.0)
             {
-                throw new ArgumentOutOfRangeException("a");
+                throw new ArgumentOutOfRangeException(nameof(a));
             }
 
             if (x < (a + 1.0))
@@ -82,14 +82,14 @@ namespace Nuclei.Nunit.Extensions
                 }
             }
 
-            throw new ArgumentOutOfRangeException("a", "Value too large.");
+            throw new ArgumentOutOfRangeException(nameof(a), "Value too large.");
         }
 
         private static double IncompleteGammaSeries(double a, double x)
         {
             if (x < 0.0)
             {
-                throw new ArgumentOutOfRangeException("x");
+                throw new ArgumentOutOfRangeException(nameof(x));
             }
 
             double num = a;
@@ -106,7 +106,7 @@ namespace Nuclei.Nunit.Extensions
                 }
             }
 
-            throw new ArgumentOutOfRangeException("a", "Value too large.");
+            throw new ArgumentOutOfRangeException(nameof(a), "Value too large.");
         }
     }
 }
